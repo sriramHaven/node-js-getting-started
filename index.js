@@ -97,7 +97,7 @@ function giveNeedsLink(sender){
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Needs Calculator",
+                    "title": "Haven Life - Needs Calculator",
                     "subtitle": "Life Insurance in 20 minutes",
                     "image_url": "https://havenlife.com/img/hero/hero05.jpg",
                     "buttons": [{
@@ -134,7 +134,7 @@ function giveQuoteLink(sender){
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                    "title": "Free Quote",
+                    "title": "Haven Life - Free Quote",
                     "subtitle": "Life Insurance in 20 minutes",
                     "image_url": "https://havenlife.com/img/hero/hero05.jpg",
                     "buttons": [{

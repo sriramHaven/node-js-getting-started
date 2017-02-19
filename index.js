@@ -102,7 +102,7 @@ function giveNeedsLink(sender){
                     "image_url": "https://havenlife.com/img/hero/hero05.jpg",
                     "buttons": [{
                         "type": "web_url",
-                        "url": "https://havenlife.com/img/hero/hero06.jpg",
+                        "url": "https://havenlife.com/term-life-insurance-calculator.html",
                         "title": "Calculate needs"
                     }],
                 }]

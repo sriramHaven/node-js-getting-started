@@ -124,6 +124,8 @@ function giveNeedsLink(sender){
             console.log('Error: ', response.body.error);
 
         }
+    });
+}
 
 function giveQuoteLink(sender){
     var messageData= {
@@ -159,6 +161,8 @@ function giveQuoteLink(sender){
             console.log('Error: ', response.body.error);
 
         }
+    });
+}
 
 function sendGenericMessage(sender) {
     var messageData = {

@@ -52,10 +52,20 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             var text = event.message.text
             if (text === 'Generic') {
-                sendGenericMessage(sender)
+                sendGenericMessage(sender);
                 continue
             }
-            sendTextMessage(sender, text.substring(0, 200));
+
+            if(text==='Yes'){
+                giveQuoteLink(sender);
+                sendTextMessage(sender, 'Do you know which option you need?');
+                continue
+            }
+            if(text === 'No'){
+                giveNeedsLink(sender);
+                continue
+            }
+            sendTextMessage(sender, 'Hello, Would you like a free Quote today?');
         }
     }
     res.sendStatus(200);
@@ -78,6 +88,48 @@ function sendTextMessage(sender, text) {
             console.log('Error: ', response.body.error)
         }
     })
+}
+
+function giveNeedsLink(sender){
+    var messageData= {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Needs Calculator",
+                    "subtitle": "Life Insurance in 20 minutes",
+                    "image_url": "https://havenlife.com/img/hero/hero05.jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://havenlife.com/img/hero/hero06.jpg",
+                        "title": "Calculate needs"
+                    }],
+                }]
+            }
+        }
+    }
+}
+
+function giveQuoteLink(sender){
+    var messageData= {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Free Quote",
+                    "subtitle": "Life Insurance in 20 minutes",
+                    "image_url": "https://havenlife.com/img/hero/hero05.jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://havenlife.com/term-life-insurance-quote.html",
+                        "title": "Free Quote"
+                    }],
+                }]
+            }
+        }
+    }
 }
 
 function sendGenericMessage(sender) {

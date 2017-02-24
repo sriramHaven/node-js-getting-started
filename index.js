@@ -59,6 +59,7 @@ app.post('/webhook/', function (req, res) {
             if(text==='Yes'){
                 giveQuoteLink(sender);
                 sendTextMessage(sender, 'Do you know which option you need?');
+                giveQuotes(sender);
                 continue
             }
             if(text === 'No'){
@@ -70,6 +71,33 @@ app.post('/webhook/', function (req, res) {
     }
     res.sendStatus(200);
 });
+
+function giveQuotes(sender){
+    request({
+        url: 'http://quotes-service.ci.dev.havenlife.com/quote/coverage?gender=female&health_category=good&is_smoker=false&age=25&term_length=10&product_identifier=CASTerm&coverage_amount=300000',
+        auth: {
+            'bearer': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE0ODM0NTQyODZ9.3mvuG8Q9v73tGA7gBg2L78Ws8uCk1bO2cPZYt_ZL2Os'
+        }
+    }, function(err, res) {
+            var messageData = { text:res.body[0]["monthly_rate"] };
+            request({
+                url: 'https://graph.facebook.com/v2.6/me/messages',
+                qs: {access_token:token},
+                method: 'POST',
+                json: {
+                    recipient: {id:sender},
+                    message: messageData,
+                }
+            }, function(error, response, body) {
+                if (error) {
+                    console.log('Error sending messages: ', error)
+                } else if (response.body.error) {
+                    console.log('Error: ', response.body.error)
+                }
+            })
+            //process the JSON data et
+    })
+}
 
 function sendTextMessage(sender, text) {
     var messageData = { text:text };
